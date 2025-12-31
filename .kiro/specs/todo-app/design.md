@@ -54,11 +54,13 @@ app/
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── index.html
-│   │   └── help.html
+│   │   ├── help.html
+│   │   └── contact.html
 │   ├── routes/
 │   │   ├── __init__.py
 │   │   ├── main.py
-│   │   └── help.py
+│   │   ├── help.py
+│   │   └── contact.py
 │   ├── models/
 │   │   ├── __init__.py
 │   │   └── task.py
@@ -133,12 +135,23 @@ from flask import Blueprint, render_template
 
 help_bp = Blueprint('help', __name__)
 
-@main_bp.route('/help')
+@help_bp.route('/help')
 def help_page():
     """Render the help page"""
 ```
 
-#### 5. Client-Side JavaScript (`src/static/js/todo.js`)
+#### 5. Contact Routes (`src/routes/contact.py`)
+```python
+from flask import Blueprint, render_template
+
+contact_bp = Blueprint('contact', __name__)
+
+@contact_bp.route('/contact')
+def contact_page():
+    """Render the contact page"""
+```
+
+#### 6. Client-Side JavaScript (`src/static/js/todo.js`)
 ```javascript
 class TodoApp {
     constructor() {
@@ -169,6 +182,7 @@ class LocalStorageManager {
 #### REST API Endpoints
 - `GET /` - Main todo interface
 - `GET /help` - Help page
+- `GET /contact` - Contact page
 - `POST /api/tasks` - Create new task
 - `PUT /api/tasks/<id>` - Update task completion
 - `DELETE /api/tasks/<id>` - Delete task
@@ -296,3 +310,7 @@ Based on the acceptance criteria analysis, the following properties must hold fo
 ### Property 9: Immediate UI Feedback
 *For any* user interaction with interactive elements, visual feedback should be provided immediately without delay.
 **Validates: Requirements 6.4**
+
+### Property 10: Contact Page Navigation and Content
+*For any* user accessing the contact page, the page should be accessible from the main interface and contain a telephone number, email address, and supporting text with contact instructions.
+**Validates: Requirements 8.1, 8.2, 8.3, 8.4**

@@ -90,3 +90,14 @@ A simple web application for tracking personal tasks and todo items. The system 
 3. WHEN the User navigates to the help page, THE Todo Application SHALL display instructions for marking items as complete
 4. WHEN the User navigates to the help page, THE Todo Application SHALL display instructions for deleting items
 5. THE Todo Application SHALL provide a navigation control to return from the help page to the Task List
+
+### Requirement 8: Contact Information
+
+**User Story:** As a user, I want to access contact information, so that I can reach out for support or provide feedback about the application.
+
+#### Acceptance Criteria
+
+1. THE Todo Application SHALL provide a contact page accessible from the main interface
+2. THE Todo Application SHALL display a telephone number on the contact page
+3. THE Todo Application SHALL display an email address on the contact page
+4. THE Todo Application SHALL display supporting text with instructions for contacting support

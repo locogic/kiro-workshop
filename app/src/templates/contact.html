@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Todo App{% endblock %}
+{% block header %}Todo App - Contact{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <h2>Contact Information</h2>
+    
+    <section class="contact-section">
+        <h3>Get in Touch</h3>
+        <p>Need help with the Todo App or have feedback to share? We're here to help!</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <h4>Phone Support</h4>
+                <p class="contact-phone">📞 <a href="tel:+1-555-TODO-APP">+1 (555) TODO-APP</a></p>
+                <p class="contact-hours">Available Monday - Friday, 9 AM - 5 PM EST</p>
+            </div>
+            
+            <div class="contact-item">
+                <h4>Email Support</h4>
+                <p class="contact-email">📧 <a href="mailto:support@todoapp.com">support@todoapp.com</a></p>
+                <p class="contact-response">We typically respond within 24 hours</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section">
+        <h3>How to Contact Support</h3>
+        <div class="instructions">
+            <p><strong>For technical issues:</strong></p>
+            <ul>
+                <li>Call our phone support line for immediate assistance</li>
+                <li>Email us with detailed information about the problem</li>
+                <li>Include your browser type and version if reporting a bug</li>
+            </ul>
+            
+            <p><strong>For feedback and suggestions:</strong></p>
+            <ul>
+                <li>Send us an email with your ideas for improvement</li>
+                <li>Let us know what features you'd like to see added</li>
+                <li>Share your experience using the Todo App</li>
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -53,78 +53,169 @@ class TodoApp {
     /**
      * Add a new task to the list
      * @param {string} description - Task description
-     * @returns {Object|null} Created task object or null if invalid
+     * @returns {Promise<Object|null>} Created task object or null if invalid
      */
-    addTask(description) {
+    async addTask(description) {
         // Validate task description (Requirements 1.2)
         if (!this.validateTaskDescription(description)) {
+            this.showError('Please enter a valid task description.');
             return null;
         }
         
-        // Create new task object
-        const newTask = {
-            id: this.generateTaskId(),
-            description: description.trim(),
-            completed: false,
-            created_at: new Date().toISOString()
-        };
-        
-        // Add to tasks array (Requirements 1.1)
-        this.tasks.push(newTask);
-        
-        // Save to storage
-        this.saveTasks();
-        
-        // Re-render tasks
-        this.renderTasks();
-        
-        return newTask;
+        try {
+            // Call API endpoint via fetch (Requirements 1.1)
+            const response = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    description: description.trim()
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Failed to create task:', errorData.error);
+                this.showError('Failed to create task. Please try again.');
+                return null;
+            }
+            
+            const newTask = await response.json();
+            
+            // Add to local tasks array
+            this.tasks.push(newTask);
+            
+            // Save to storage
+            this.saveTasks();
+            
+            // Update UI immediately after operation (Requirements 1.1)
+            this.renderTasks();
+            
+            return newTask;
+            
+        } catch (error) {
+            console.error('Network error creating task:', error);
+            this.showError('Network error. Task saved locally but may not sync until connection is restored.');
+            
+            // Fallback to local-only creation
+            const newTask = {
+                id: this.generateTaskId(),
+                description: description.trim(),
+                completed: false,
+                created_at: new Date().toISOString()
+            };
+            
+            this.tasks.push(newTask);
+            this.saveTasks();
+            this.renderTasks();
+            
+            return newTask;
+        }
     }
     
     /**
      * Toggle task completion status
      * @param {string} taskId - ID of task to toggle
-     * @returns {boolean} Success status
+     * @returns {Promise<boolean>} Success status
      */
-    toggleTask(taskId) {
+    async toggleTask(taskId) {
         const task = this.findTaskById(taskId);
         if (!task) {
+            this.showError('Task not found.');
             return false;
         }
         
-        // Toggle completion status (Requirements 3.1)
-        task.completed = !task.completed;
+        const newCompletedStatus = !task.completed;
         
-        // Save to storage
-        this.saveTasks();
-        
-        // Re-render tasks
-        this.renderTasks();
-        
-        return true;
+        try {
+            // Call API endpoint via fetch to persist changes (Requirements 3.1, 3.4)
+            const response = await fetch(`/api/tasks/${taskId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    completed: newCompletedStatus
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Failed to update task:', errorData.error);
+                this.showError('Failed to update task. Please try again.');
+                return false;
+            }
+            
+            // Update local task status
+            task.completed = newCompletedStatus;
+            
+            // Save to storage
+            this.saveTasks();
+            
+            // Update visual appearance for completed tasks (Requirements 3.2)
+            this.renderTasks();
+            
+            return true;
+            
+        } catch (error) {
+            console.error('Network error updating task:', error);
+            this.showError('Network error. Task updated locally but may not sync until connection is restored.');
+            
+            // Fallback to local-only update
+            task.completed = newCompletedStatus;
+            this.saveTasks();
+            this.renderTasks();
+            return true;
+        }
     }
     
     /**
      * Delete a task from the list
      * @param {string} taskId - ID of task to delete
-     * @returns {boolean} Success status
+     * @returns {Promise<boolean>} Success status
      */
-    deleteTask(taskId) {
+    async deleteTask(taskId) {
         const taskIndex = this.tasks.findIndex(task => task.id === taskId);
         if (taskIndex === -1) {
+            this.showError('Task not found.');
             return false;
         }
         
-        // Remove task from array (Requirements 4.1)
-        this.tasks.splice(taskIndex, 1);
-        
-        // Save to storage
-        this.saveTasks();
-        
-        // Re-render tasks
-        this.renderTasks();
-        
-        return true;
+        try {
+            // Call API endpoint via fetch to persist changes (Requirements 4.1, 4.2, 4.3)
+            const response = await fetch(`/api/tasks/${taskId}`, {
+                method: 'DELETE'
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Failed to delete task:', errorData.error);
+                this.showError('Failed to delete task. Please try again.');
+                return false;
+            }
+            
+            // Remove task from UI and storage (Requirements 4.1, 4.2, 4.3)
+            this.tasks.splice(taskIndex, 1);
+            
+            // Save to storage
+            this.saveTasks();
+            
+            // Re-render tasks
+            this.renderTasks();
+            
+            return true;
+            
+        } catch (error) {
+            console.error('Network error deleting task:', error);
+            this.showError('Network error. Task deleted locally but may not sync until connection is restored.');
+            
+            // Fallback to local-only deletion
+            this.tasks.splice(taskIndex, 1);
+            this.saveTasks();
+            this.renderTasks();
+            return true;
+        }
     }
     
     /**
@@ -211,6 +302,39 @@ class TodoApp {
     }
     
     /**
+     * Show error message to user
+     * @param {string} message - Error message to display
+     */
+    showError(message) {
+        // Remove any existing error messages
+        this.clearError();
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        
+        const container = document.querySelector('.todo-container') || document.querySelector('.container');
+        if (container) {
+            container.insertBefore(errorDiv, container.firstChild);
+            
+            // Auto-remove error after 5 seconds
+            setTimeout(() => {
+                this.clearError();
+            }, 5000);
+        }
+    }
+    
+    /**
+     * Clear error messages
+     */
+    clearError() {
+        const existingError = document.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+    
+    /**
      * Clear input field and focus it
      */
     clearInput() {
@@ -225,15 +349,15 @@ class TodoApp {
      * Set up event listeners for UI interactions
      */
     setupEventListeners() {
-        // Task form submission
+        // Task form submission - prevent default and call API endpoints via fetch
         const taskForm = document.getElementById('task-form');
         if (taskForm) {
-            taskForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+            taskForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent default form submission
                 const input = document.getElementById('task-input');
                 if (input && input.value.trim()) {
-                    this.addTask(input.value);
-                    this.clearInput();
+                    await this.addTask(input.value);
+                    this.clearInput(); // Clear input and focus for next entry (Requirements 1.3)
                 }
             });
         }
@@ -241,16 +365,17 @@ class TodoApp {
         // Task list interactions (using event delegation)
         const taskList = document.getElementById('task-list');
         if (taskList) {
-            taskList.addEventListener('click', (e) => {
+            taskList.addEventListener('click', async (e) => {
                 const taskItem = e.target.closest('.task-item');
                 if (!taskItem) return;
                 
                 const taskId = taskItem.dataset.taskId;
                 
                 if (e.target.classList.contains('task-checkbox')) {
-                    this.toggleTask(taskId);
+                    // Add click handlers for task checkboxes (Requirements 3.1, 3.2, 3.4)
+                    await this.toggleTask(taskId);
                 } else if (e.target.classList.contains('delete-btn')) {
-                    this.deleteTask(taskId);
+                    await this.deleteTask(taskId);
                 }
             });
         }

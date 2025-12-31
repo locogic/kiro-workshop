@@ -2,7 +2,19 @@
 
 {% block content %}
 <div class="todo-container">
-    <form id="task-form" class="task-form">
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% endif %}
+    
+    {% if success %}
+    <div class="success-message">
+        {{ success }}
+    </div>
+    {% endif %}
+    
+    <form id="task-form" class="task-form" method="post" action="/api/tasks">
         <div class="input-group">
             <input 
                 type="text" 
@@ -21,6 +33,12 @@
             <p>No tasks yet. Add your first task above!</p>
         </div>
     </div>
+    
+    <noscript>
+        <div class="no-js-warning">
+            <p><strong>JavaScript is disabled.</strong> The todo app will work in basic mode. Tasks will not be saved between sessions.</p>
+        </div>
+    </noscript>
 </div>
 {% endblock %}
 

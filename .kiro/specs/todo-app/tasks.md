@@ -50,6 +50,20 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test navigation links exist
     - _Requirements: 6.1, 7.1, 7.2, 7.3, 7.4, 7.5_
 
+  - [x] 3.4 Create contact routes blueprint
+    - Implement GET /contact route
+    - Create contact template with telephone number and email address
+    - Add supporting text with contact instructions
+    - Add navigation from main interface to contact page
+    - _Requirements: 8.1, 8.2, 8.3, 8.4_
+
+  - [ ]* 3.5 Write unit tests for contact page functionality
+    - Test contact page renders correctly
+    - Test contact page contains telephone number and email
+    - Test contact page contains supporting text
+    - Test navigation to contact page exists
+    - _Requirements: 8.1, 8.2, 8.3, 8.4_
+
 - [x] 4. Implement API endpoints for task operations
   - [x] 4.1 Create POST /api/tasks endpoint
     - Handle task creation from JSON requests
@@ -72,10 +86,10 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test error handling and status codes
     - _Requirements: 1.1, 1.2, 3.1, 4.1_
 
-- [-] 5. Checkpoint - Ensure basic Flask app works
+- [x] 5. Checkpoint - Ensure basic Flask app works
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement client-side JavaScript functionality
+- [x] 6. Implement client-side JavaScript functionality
   - [x] 6.1 Create TodoApp JavaScript class
     - Implement task list management in memory
     - Add methods for add, toggle, delete operations
@@ -101,14 +115,14 @@ This implementation plan breaks down the todo web application into discrete codi
     - **Property 5: Task Display Completeness**
     - **Validates: Requirements 2.1, 2.2**
 
-- [ ] 7. Wire up client-side interactions
-  - [ ] 7.1 Connect form submission to task creation
+- [x] 7. Wire up client-side interactions
+  - [x] 7.1 Connect form submission to task creation
     - Prevent default form submission
     - Call API endpoints via fetch
     - Update UI immediately after operations
     - _Requirements: 1.1, 1.3_
 
-  - [ ] 7.2 Connect task completion toggle
+  - [x] 7.2 Connect task completion toggle
     - Add click handlers for task checkboxes
     - Update visual appearance for completed tasks
     - Persist changes via API
@@ -122,7 +136,7 @@ This implementation plan breaks down the todo web application into discrete codi
     - **Property 7: Completion Visual Feedback**
     - **Validates: Requirements 3.2**
 
-  - [ ] 7.5 Connect task deletion
+  - [x] 7.5 Connect task deletion
     - Add delete button click handlers
     - Remove tasks from UI and storage
     - _Requirements: 4.1, 4.2, 4.3_
@@ -131,31 +145,41 @@ This implementation plan breaks down the todo web application into discrete codi
     - **Property 8: Task Deletion Completeness**
     - **Validates: Requirements 4.1, 4.2, 4.3**
 
-- [ ] 8. Implement CSS styling and responsive design
-  - [ ] 8.1 Create base CSS styles
+- [x] 8. Implement CSS styling and responsive design
+  - [x] 8.1 Create base CSS styles
     - Implement clean, minimalist design
     - Add responsive layout for different screen sizes
     - Style form inputs and buttons
     - _Requirements: 6.2, 6.3_
 
-  - [ ] 8.2 Add interactive feedback styles
+  - [x] 8.2 Add interactive feedback styles
     - Implement hover and focus states
     - Add visual feedback for user interactions
     - Style completed tasks differently
     - _Requirements: 1.5, 6.4_
 
-  - [ ]* 8.3 Write property test for UI feedback
+  - [x] 8.3 Update navigation and contact page styling
+    - Update base template navigation to include contact link
+    - Style contact page content and layout
+    - Ensure responsive design for contact page
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+
+  - [ ]* 8.4 Write property test for UI feedback
     - **Property 9: Immediate UI Feedback**
     - **Validates: Requirements 6.4**
 
-- [ ] 9. Add error handling and edge cases
-  - [ ] 9.1 Implement client-side error handling
+  - [ ]* 8.5 Write unit tests for contact page navigation
+    - **Property 10: Contact Page Navigation and Content**
+    - **Validates: Requirements 8.1, 8.2, 8.3, 8.4**
+
+- [x] 9. Add error handling and edge cases
+  - [x] 9.1 Implement client-side error handling
     - Handle network errors gracefully
     - Show user-friendly error messages
     - Implement retry logic for failed requests
     - _Requirements: 5.3_
 
-  - [ ] 9.2 Add server-side error handling
+  - [x] 9.2 Add server-side error handling
     - Return proper HTTP status codes
     - Validate all input data
     - Handle edge cases (task not found, etc.)
@@ -167,8 +191,8 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test localStorage unavailable case
     - _Requirements: 1.2, 5.3_
 
-- [ ] 10. Final integration and testing
-  - [ ] 10.1 Ensure progressive enhancement works
+- [x] 10. Final integration and testing
+  - [x] 10.1 Ensure progressive enhancement works
     - Test functionality with JavaScript disabled
     - Verify basic form submission still works
     - _Requirements: 6.1_
@@ -178,7 +202,7 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test cross-browser compatibility
     - _Requirements: 1.1, 2.1, 3.1, 4.1_
 
-- [ ] 11. Final checkpoint - Complete application
+- [x] 11. Final checkpoint - Complete application
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
