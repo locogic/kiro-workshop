@@ -1,0 +1,11 @@
+[project]
+name = "kiro-workshop"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1.2",
+    "hypothesis>=6.148.8",
+    "pydantic>=2.12.5",
+    "pytest>=9.0.2",
+]
