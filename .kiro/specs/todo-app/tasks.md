@@ -28,7 +28,7 @@ This implementation plan breaks down the todo web application into discrete codi
     - Add task description validation logic
     - _Requirements: 1.1, 1.2_
 
-  - [x]* 2.4 Write property test for task creation
+  - [ ]* 2.4 Write property test for task creation
     - **Property 1: Task Addition Grows List**
     - **Validates: Requirements 1.1**
 
@@ -72,16 +72,16 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test error handling and status codes
     - _Requirements: 1.1, 1.2, 3.1, 4.1_
 
-- [ ] 5. Checkpoint - Ensure basic Flask app works
+- [-] 5. Checkpoint - Ensure basic Flask app works
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement client-side JavaScript functionality
-  - [ ] 6.1 Create TodoApp JavaScript class
+  - [x] 6.1 Create TodoApp JavaScript class
     - Implement task list management in memory
     - Add methods for add, toggle, delete operations
     - _Requirements: 1.1, 3.1, 4.1_
 
-  - [ ] 6.2 Create LocalStorageManager class
+  - [x] 6.2 Create LocalStorageManager class
     - Implement save/load tasks to/from localStorage
     - Add fallback for when localStorage unavailable
     - Display warning when localStorage fails
@@ -91,7 +91,7 @@ This implementation plan breaks down the todo web application into discrete codi
     - **Property 4: Task Persistence Round Trip**
     - **Validates: Requirements 1.4, 3.3, 4.2, 5.1, 5.2**
 
-  - [ ] 6.3 Implement DOM manipulation methods
+  - [x] 6.3 Implement DOM manipulation methods
     - Add renderTasks() to display task list
     - Add clearInput() and focus management
     - Handle empty state display

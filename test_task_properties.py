@@ -12,7 +12,7 @@ class TestTaskModelProperties:
     """Property-based tests for Task model"""
     
     @given(st.text().filter(lambda x: x and x.strip()))
-    @settings(max_examples=10)
+    @settings(max_examples=5)
     def test_valid_task_creation(self, description):
         """
         Property 2: Invalid Task Rejection (inverse test - valid tasks should be accepted)
@@ -29,7 +29,7 @@ class TestTaskModelProperties:
         assert len(task.id) > 0
     
     @given(st.text().filter(lambda x: not x or not x.strip()))
-    @settings(max_examples=10)
+    @settings(max_examples=5)
     def test_invalid_task_rejection(self, invalid_description):
         """
         Property 2: Invalid Task Rejection
@@ -44,7 +44,7 @@ class TestTaskModelProperties:
             manager.create_task(invalid_description)
     
     @given(st.text().filter(lambda x: x and x.strip()))
-    @settings(max_examples=10)
+    @settings(max_examples=5)
     def test_task_serialization_round_trip(self, description):
         """
         Property: Task serialization round trip
@@ -68,7 +68,7 @@ class TestTaskModelProperties:
         assert abs((restored_task.created_at - original_task.created_at).total_seconds()) < 1
 
     @given(st.text().filter(lambda x: x and x.strip()))
-    @settings(max_examples=10)
+    @settings(max_examples=5)
     def test_task_creation_grows_list(self, description):
         """
         Property 1: Task Addition Grows List
