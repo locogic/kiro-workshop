@@ -25,6 +25,9 @@ def create_app(config=None):
     # Extensions will be initialized here as needed
     
     # Register blueprints
-    # Blueprints will be registered here as they are created
+    from .routes.main import main_bp
+    from .routes.help import help_bp
+    app.register_blueprint(main_bp)
+    app.register_blueprint(help_bp)
     
     return app

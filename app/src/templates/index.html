@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="todo-container">
+    <form id="task-form" class="task-form">
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="task-input" 
+                name="description" 
+                placeholder="Add a new task..." 
+                required
+                autocomplete="off"
+            >
+            <button type="submit" class="add-btn">Add Task</button>
+        </div>
+    </form>
+    
+    <div id="task-list" class="task-list">
+        <div id="empty-state" class="empty-state">
+            <p>No tasks yet. Add your first task above!</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize the todo app when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof TodoApp !== 'undefined') {
+            window.todoApp = new TodoApp();
+        }
+    });
+</script>
+{% endblock %}

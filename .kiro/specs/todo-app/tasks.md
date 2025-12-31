@@ -32,13 +32,13 @@ This implementation plan breaks down the todo web application into discrete codi
     - **Property 1: Task Addition Grows List**
     - **Validates: Requirements 1.1**
 
-- [ ] 3. Implement Flask routes and basic templates
-  - [ ] 3.1 Create main routes blueprint
+- [x] 3. Implement Flask routes and basic templates
+  - [x] 3.1 Create main routes blueprint
     - Implement GET / route for main interface
     - Create basic HTML template with task form
     - _Requirements: 6.1, 1.1_
 
-  - [ ] 3.2 Create help routes blueprint
+  - [x] 3.2 Create help routes blueprint
     - Implement GET /help route
     - Create help template with usage instructions
     - Add navigation between main and help pages
@@ -50,19 +50,19 @@ This implementation plan breaks down the todo web application into discrete codi
     - Test navigation links exist
     - _Requirements: 6.1, 7.1, 7.2, 7.3, 7.4, 7.5_
 
-- [ ] 4. Implement API endpoints for task operations
-  - [ ] 4.1 Create POST /api/tasks endpoint
+- [x] 4. Implement API endpoints for task operations
+  - [x] 4.1 Create POST /api/tasks endpoint
     - Handle task creation from JSON requests
     - Return appropriate HTTP status codes
     - Add error handling for invalid input
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 4.2 Create PUT /api/tasks/<id> endpoint
+  - [x] 4.2 Create PUT /api/tasks/<id> endpoint
     - Handle task completion status updates
     - Validate task ID exists
     - _Requirements: 3.1, 3.4_
 
-  - [ ] 4.3 Create DELETE /api/tasks/<id> endpoint
+  - [x] 4.3 Create DELETE /api/tasks/<id> endpoint
     - Handle task deletion
     - Return appropriate responses
     - _Requirements: 4.1_

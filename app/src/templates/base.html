@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Todo App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{% block header %}Todo App{% endblock %}</h1>
+            <nav>
+                {% block nav %}
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('help.help_page') }}">Help</a>
+                {% endblock %}
+            </nav>
+        </header>
+        
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/todo.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

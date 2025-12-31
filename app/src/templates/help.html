@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Help - Todo App{% endblock %}
+{% block header %}Todo App - Help{% endblock %}
+
+{% block content %}
+<div class="help-container">
+    <h2>How to Use Todo App</h2>
+    
+    <section class="help-section">
+        <h3>Creating Todo Items</h3>
+        <p>To create a new todo item:</p>
+        <ol>
+            <li>Type your task description in the input field on the main page</li>
+            <li>Press Enter or click the "Add Task" button</li>
+            <li>Your task will appear in the list below</li>
+        </ol>
+    </section>
+    
+    <section class="help-section">
+        <h3>Marking Items as Complete</h3>
+        <p>To mark a todo item as complete:</p>
+        <ol>
+            <li>Click on the checkbox next to the task</li>
+            <li>The task will be visually marked as completed</li>
+            <li>Click again to mark it as incomplete</li>
+        </ol>
+    </section>
+    
+    <section class="help-section">
+        <h3>Deleting Items</h3>
+        <p>To delete a todo item:</p>
+        <ol>
+            <li>Click the delete button (×) next to the task</li>
+            <li>The task will be permanently removed from your list</li>
+        </ol>
+    </section>
+    
+    <section class="help-section">
+        <h3>Data Storage</h3>
+        <p>Your tasks are automatically saved in your browser's local storage. They will persist between sessions unless you clear your browser data.</p>
+    </section>
+</div>
+{% endblock %}
