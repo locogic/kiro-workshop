@@ -1,0 +1,4 @@
+# file: /Users/gaston/Documents/locogic/projects/public/git/kiro-workshop/app/src/models/task.py
+# hypothesis_version: 6.148.8
+
+['Completion status', 'Creation timestamp', 'Task', 'Task description', 'completed', 'created_at', 'description', 'id']

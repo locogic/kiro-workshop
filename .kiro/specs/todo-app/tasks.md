@@ -12,23 +12,23 @@ This implementation plan breaks down the todo web application into discrete codi
   - Create basic app.py entry point
   - _Requirements: 6.1_
 
-- [ ] 2. Implement core Task model and validation
-  - [ ] 2.1 Create Task model with Pydantic validation
+- [x] 2. Implement core Task model and validation
+  - [x] 2.1 Create Task model with Pydantic validation
     - Implement Task class with id, description, completed, created_at fields
     - Add validation for non-empty descriptions
     - Add serialization methods (to_dict, from_dict)
     - _Requirements: 1.2, 5.1_
 
-  - [ ]* 2.2 Write property test for Task model validation
+  - [x]* 2.2 Write property test for Task model validation
     - **Property 2: Invalid Task Rejection**
     - **Validates: Requirements 1.2**
 
-  - [ ] 2.3 Create TaskManager class
+  - [x] 2.3 Create TaskManager class
     - Implement task creation with ID generation
     - Add task description validation logic
     - _Requirements: 1.1, 1.2_
 
-  - [ ]* 2.4 Write property test for task creation
+  - [x]* 2.4 Write property test for task creation
     - **Property 1: Task Addition Grows List**
     - **Validates: Requirements 1.1**
 

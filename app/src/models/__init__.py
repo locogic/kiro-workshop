@@ -1,1 +1,7 @@
-# Models package
+"""
+Models package
+"""
+
+from .task import Task, TaskManager
+
+__all__ = ['Task', 'TaskManager']
